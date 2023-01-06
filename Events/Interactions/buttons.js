@@ -27,9 +27,9 @@ module.exports = {
                 ephemeral: true,
               });
             }
-          }, ms("5s"));
+          }, ms("1s"));
         }
-      }, ms("5s"));
+      }, ms("2s"));
     }
 
     const Message = await client.messages.get(interaction.message.id);

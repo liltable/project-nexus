@@ -26,7 +26,7 @@ module.exports = {
             ephemeral: true,
           });
         }
-      }, ms("5s"));
+      }, ms("3s"));
     }
 
     Modal.execute(interaction, client).catch((e) => {

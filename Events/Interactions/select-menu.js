@@ -12,7 +12,7 @@ module.exports = {
    * @param {Client} client
    */
   async execute(interaction, client) {
-    if (!interaction.isSelectMenu()) return;
+    if (!interaction.isStringSelectMenu()) return;
     const Menu = client.selectMenus.get(interaction.customId);
 
     if (!Menu)
@@ -23,7 +23,7 @@ module.exports = {
             ephemeral: true,
           });
         }
-      }, ms("5s"));
+      }, ms("3s"));
 
     Menu.execute(interaction, client).catch((e) => {
       console.log(`> Failed to execute select-menu ${interaction.customId}.`);

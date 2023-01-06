@@ -26,9 +26,9 @@ module.exports = {
                 ephemeral: true,
               });
             }
-          }, ms("5s"));
+          }, ms("1s"));
         }
-      }, ms("5s"));
+      }, ms("2s"));
     }
 
     Command.execute(interaction, client).catch((e) => {
