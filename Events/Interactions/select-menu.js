@@ -15,21 +15,12 @@ module.exports = {
     if (!interaction.isStringSelectMenu()) return;
     const Menu = client.selectMenus.get(interaction.customId);
 
-    if (!Menu)
-      setTimeout(() => {
-        if (!interaction.replied || !interaction.deferred) {
-          return interaction.reply({
-            embeds: [DefaultEmbeds.UnknownMenu],
-            ephemeral: true,
-          });
-        }
-      }, ms("3s"));
+    if (!Menu) return;
 
-    Menu.execute(interaction, client).catch((e) => {
-      console.log(`> Failed to execute select-menu ${interaction.customId}.`);
-      setTimeout(() => {
-        console.log(e);
-      }, ms("3s"));
-    });
+    try {
+      Menu.execute(interaction, client);
+    } catch (err) {
+      console.log(err);
+    }
   },
 };

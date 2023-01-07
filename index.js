@@ -7,6 +7,7 @@ const {
   loadButtons,
   loadModals,
   loadSelectMenus,
+  loadItems,
 } = require("./functions");
 const { connect, set } = require("mongoose");
 
@@ -19,6 +20,7 @@ client.modals = new Collection();
 client.colors = require("discord.js").Colors;
 client.selectMenus = new Collection();
 client.messages = new Collection();
+client.items = new Collection();
 
 var startClient = true;
 
@@ -32,12 +34,13 @@ if (startClient) {
     console.log(`> Client connected to cloud storage.`);
   });
 }
+console.log(`> Starting client at ${getClientTime()}.`);
 loadEvents(client);
 loadButtons(client);
 loadModals(client);
 loadWebClient();
 loadSelectMenus(client);
-console.log(`> Starting client at ${getClientTime()}.`);
+loadItems(client);
 
 setTimeout(() => {
   if (!client.isReady())

@@ -193,6 +193,31 @@ async function loadSelectMenus(client) {
     `\n> Successfully loaded ${Menus.length} select-menus.`
   );
 }
+/**
+ *
+ * @param {Client} client
+ * @returns
+ */
+async function loadItems(client) {
+  await client.items.clear();
+  const ascii = require("ascii-table");
+  const table = new ascii().setHeading("Items:", "Status:");
+  const Items = [];
+  const Files = await loadFiles("Items");
+  if (Files.length !== 0) {
+    Files.forEach((file) => {
+      const item = require(file);
+      if (!item.Name || !item.ID) return table.addRow("UNDEFINED", "🟥");
+      else table.addRow(item.Name, "🟩");
+      client.items.set(item.ID, item.Name);
+      Items.push(item);
+    });
+  } else table.addRow("Blank.", "🟥");
+  return console.log(
+    table.toString(),
+    `\n> Successfully loaded ${Items.length} Nexus items.`
+  );
+}
 
 module.exports = {
   loadEvents,
@@ -203,4 +228,5 @@ module.exports = {
   loadButtons,
   loadModals,
   loadSelectMenus,
+  loadItems,
 };

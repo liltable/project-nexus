@@ -18,24 +18,12 @@ module.exports = {
     if (!interaction.isModalSubmit()) return;
     const Modal = await client.modals.get(interaction.customId);
 
-    if (!Modal) {
-      setTimeout(() => {
-        if (!interaction.replied || !interaction.deferred) {
-          return interaction.reply({
-            embeds: [DefaultEmbeds.UnknownModal],
-            ephemeral: true,
-          });
-        }
-      }, ms("3s"));
-    }
+    if (!Modal) return;
 
-    Modal.execute(interaction, client).catch((e) => {
-      console.log(
-        `Failed to execute modal ${interaction.customId} with user ${interaction.user.username}.`
-      );
-      setTimeout(() => {
-        console.log(e);
-      }, ms("3s"));
-    });
+    try {
+      Modal.execute(interaction, client);
+    } catch (err) {
+      console.log(err);
+    }
   },
 };

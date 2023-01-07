@@ -14,7 +14,11 @@ module.exports = {
       embeds: [
         new EmbedBuilder()
           .setColor(Colors.Blue)
-          .setDescription(`> :satellite: Client latency: ${client.ws.ping}ms`),
+          .setDescription(
+            `> ◜:satellite: Client latency: ${
+              client.ws.ping
+            }ms\n> ◟ ⌚ Uptime: <t:${parseInt(client.readyTimestamp / 1000)}:R>`
+          ),
       ],
       ephemeral: true,
     });

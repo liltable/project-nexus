@@ -16,26 +16,12 @@ module.exports = {
   async execute(interaction, client) {
     if (!interaction.isChatInputCommand()) return;
     let Command = await client.commands.get(interaction.commandName);
-    if (!Command) {
-      setTimeout(() => {
-        if (!Command) {
-          setTimeout(() => {
-            if (!interaction.replied || !interaction.deferred) {
-              return interaction.reply({
-                embeds: [DefaultEmbeds.UnknownCommand],
-                ephemeral: true,
-              });
-            }
-          }, ms("1s"));
-        }
-      }, ms("2s"));
-    }
+    if (!Command) return;
 
-    Command.execute(interaction, client).catch((e) => {
-      console.log(`> Failed to execute command ${Command.name}.`);
-      setTimeout(() => {
-        console.log(e);
-      }, ms("3s"));
-    });
+    try {
+      Command.execute(interaction, client);
+    } catch (err) {
+      console.log(err);
+    }
   },
 };

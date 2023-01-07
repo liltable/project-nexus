@@ -17,20 +17,7 @@ module.exports = {
   async execute(interaction, client) {
     if (!interaction.isButton()) return;
     let Button = await client.buttons.get(interaction.customId);
-    if (!Button) {
-      setTimeout(() => {
-        if (!Button) {
-          setTimeout(() => {
-            if (!interaction.replied || !interaction.deferred) {
-              return interaction.reply({
-                embeds: [DefaultEmbeds.UnknownButton],
-                ephemeral: true,
-              });
-            }
-          }, ms("1s"));
-        }
-      }, ms("2s"));
-    }
+    if (!Button) return;
 
     const Message = await client.messages.get(interaction.message.id);
     if (Message) {
@@ -45,11 +32,10 @@ module.exports = {
         });
     }
 
-    Button.execute(interaction, client).catch((e) => {
-      console.log(`Failed to execute button ${interaction.customId}.`);
-      return setTimeout(() => {
-        console.log(e);
-      }, ms("3s"));
-    });
+    try {
+      Button.execute(interaction, client);
+    } catch (err) {
+      console.log(err);
+    }
   },
 };
