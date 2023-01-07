@@ -1,0 +1,34 @@
+const {
+  ChatInputCommandInteraction,
+  ApplicationCommandOptionType,
+} = require("discord.js");
+const client = require("../../");
+const { DefaultEmbeds } = require("../../default");
+module.exports = {
+  name: "get-info",
+  description: "Returns the info of an item.",
+  options: [
+    {
+      name: "search",
+      description: "Input a search term.",
+      type: ApplicationCommandOptionType.String,
+      required: true,
+    },
+  ],
+  /**
+   *
+   * @param {ChatInputCommandInteraction} interaction
+   * @param {client} client
+   */
+  async execute(interaction, client) {
+    const SearchTerm = interaction.options.getString("search", true);
+    const Item = client.items.get(
+      (item) => item.name === SearchTerm || item.aliases.includes(SearchTerm)
+    );
+    if (!Item)
+      return interaction.reply({
+        embeds: [DefaultEmbeds.UnknownItem],
+        ephemeral: true,
+      });
+  },
+};
