@@ -3,6 +3,7 @@ const {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
+  Client,
 } = require("discord.js");
 const { SystemEmbeds } = require("../../embeds");
 
@@ -12,8 +13,9 @@ module.exports = {
   /**
    *
    * @param {ChatInputCommandInteraction} interaction
+   * @param {Client} client
    */
-  async execute(interaction) {
+  async execute(interaction, client) {
     const Buttons = {
       Begin: new ButtonBuilder()
         .setCustomId("start")
@@ -21,10 +23,14 @@ module.exports = {
         .setStyle(ButtonStyle.Success),
     };
 
-    return interaction.reply({
+    await interaction.reply({
       embeds: [SystemEmbeds.Start],
       components: [new ActionRowBuilder().setComponents(Buttons.Begin)],
       ephemeral: true,
     });
+    return client.messages.set(
+      (await interaction.fetchReply()).id,
+      interaction.user.id
+    );
   },
 };

@@ -20,15 +20,5 @@ module.exports = {
    * @param {ChatInputCommandInteraction} interaction
    * @param {client} client
    */
-  async execute(interaction, client) {
-    const SearchTerm = interaction.options.getString("search", true);
-    const Item = client.items.get(
-      (item) => item.name === SearchTerm || item.aliases.includes(SearchTerm)
-    );
-    if (!Item)
-      return interaction.reply({
-        embeds: [DefaultEmbeds.UnknownItem],
-        ephemeral: true,
-      });
-  },
+  async execute(interaction, client) {},
 };

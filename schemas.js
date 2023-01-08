@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 const NexusStorage = new Schema({
-  PlayerID: String,
+  PlayerID: { type: String, required: true },
   Stats: {
     Defense: { type: Number, default: 10 },
     Attack: { type: Number, default: 10 },
@@ -15,7 +15,7 @@ const NexusStorage = new Schema({
   Profile: {
     Achievements: [
       {
-        Name: String,
+        Name: { type: String, required: true },
         Description: String,
         Reward: Number,
       },
@@ -23,7 +23,7 @@ const NexusStorage = new Schema({
     Titles: {
       Unlocked: [
         {
-          Name: String,
+          Name: { type: String, required: true },
           Description: String,
           Equipped: { type: Boolean, default: false, enum: [false, true] },
         },
@@ -45,15 +45,16 @@ const NexusStorage = new Schema({
   },
   Inventory: [
     {
-      ID: String,
-      Name: String,
+      ID: { type: String, required: true },
+      Aliases: { type: Array, required: false, default: [] },
+      Name: { type: String, required: true },
       Description: { type: String, required: false },
       Grade: {
         Value: String,
         default: "F",
         enum: ["F", "D", "C", "B", "A", "AA", "AAA", "S", "SS"],
       },
-      Value: { type: Number },
+      Value: { type: Number, required: false, default: 10 },
       Type: {
         type: String,
         enum: [
@@ -66,6 +67,7 @@ const NexusStorage = new Schema({
           "Fragment",
           "Artifact",
         ],
+        required: true,
       },
     },
   ],

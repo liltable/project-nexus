@@ -45,6 +45,9 @@ const DefaultEmbeds = {
   UnknownCommand: new EmbedBuilder()
     .setColor(Colors.Red)
     .setDescription(`> :no_entry_sign: Unknown command.`),
+  UnknownItem: new EmbedBuilder()
+    .setColor(Colors.Red)
+    .setDescription(`> :no_entry_sign: Unknown item.`),
 };
 
 const LogTypes = {
@@ -56,4 +59,62 @@ const LogTypes = {
   MessageLogs: "message",
 };
 
-module.exports = { DefaultButtons, DefaultEmbeds, LogTypes };
+class Item {
+  constructor() {
+    this.aliases = [];
+    this.id = null;
+    this.name = null;
+    this.description = null;
+    this.grade = null;
+    this.value = null;
+    this.type = null;
+  }
+  setName(n) {
+    this.name = n;
+    return this;
+  }
+  setDescription(d) {
+    this.description = d;
+    return this;
+  }
+  addAliases(a) {
+    this.aliases.push(a);
+    return this;
+  }
+  setID(id) {
+    this.id = id;
+    return this;
+  }
+  setGrade(g) {
+    if (g === "F" || "D" || "C" || "B" || "A" || "AA" || "AAA" || "S" || "SS") {
+      this.grade = g;
+    }
+    return this;
+  }
+  setValue(v) {
+    this.value = v;
+    return this;
+  }
+  setType(t) {
+    if (
+      t === "Weapon" ||
+      "Helmet" ||
+      "Chestplate" ||
+      "Boots" ||
+      "Backpack" ||
+      "Accessory" ||
+      "Fragment" ||
+      "Artifact"
+    ) {
+      this.type = t;
+    }
+    return this;
+  }
+}
+
+class Weapon extends Item {
+  constructor() {
+    super();
+  }
+}
+module.exports = { DefaultButtons, DefaultEmbeds, LogTypes, Item };

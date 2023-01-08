@@ -4,8 +4,6 @@ const {
   Colors,
   Client,
 } = require("discord.js");
-const ms = require("ms");
-const { DefaultEmbeds } = require("../../default");
 
 module.exports = {
   name: "interactionCreate",

@@ -207,15 +207,15 @@ async function loadItems(client) {
   if (Files.length !== 0) {
     Files.forEach((file) => {
       const item = require(file);
-      if (!item.Name || !item.ID) return table.addRow("UNDEFINED", "🟥");
+      if (!item.ID) return table.addRow("UNDEFINED", "🟥");
       else table.addRow(item.Name, "🟩");
-      client.items.set(item.ID, item.Name);
+      client.items.set(item.ID, item);
       Items.push(item);
     });
   } else table.addRow("Blank.", "🟥");
   return console.log(
     table.toString(),
-    `\n> Successfully loaded ${Items.length} Nexus items.`
+    `\n> Successfully loaded ${Items.length} items.`
   );
 }
 
