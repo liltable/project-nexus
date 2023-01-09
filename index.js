@@ -1,4 +1,4 @@
-const { Client, Collection, codeBlock } = require("discord.js");
+const { Client, Collection } = require("discord.js");
 const ms = require("ms");
 const {
   loadEvents,
