@@ -28,9 +28,7 @@ module.exports = {
   async autocomplete(interaction, client) {
     const FocusedOption = interaction.options.getFocused(true);
     if (FocusedOption.name !== "search") return;
-    const choices = await client.items.map((item) => {
-      return item.id;
-    });
+    const choices = this.options[0].choices;
     const filtered = choices.filter((choice) =>
       choice.startsWith(FocusedOption.value)
     );

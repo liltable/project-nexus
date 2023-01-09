@@ -45,6 +45,7 @@ loadItems(client);
 setTimeout(() => {
   if (!client.isReady())
     return console.log(`> Failed to login after five seconds.`);
+  process.abort();
 }, ms("5s"));
 
 module.exports = client;
