@@ -22,7 +22,7 @@ client.selectMenus = new Collection();
 client.messages = new Collection();
 client.items = new Collection();
 
-var startClient = true;
+var startClient = false;
 
 if (startClient) {
   client.login(client.config.token);

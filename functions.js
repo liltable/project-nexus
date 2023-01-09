@@ -90,6 +90,7 @@ async function loadCommands(client) {
 }
 
 const { Client } = require("discord.js");
+const { Item } = require("./Classes/item");
 /**
  *
  * @param {Client} client
@@ -207,10 +208,12 @@ async function loadItems(client) {
   if (Files.length !== 0) {
     Files.forEach((file) => {
       const item = require(file);
-      if (!item.ID) return table.addRow("UNDEFINED", "🟥");
-      else table.addRow(item.Name, "🟩");
-      client.items.set(item.ID, item);
-      Items.push(item);
+      const { data } = item;
+      if (!data.id) return table.addRow("UNDEFINED", "🟥");
+      if (!data.name) return table.addRow(data.id, "NO NAME");
+      else table.addRow(data.name, "🟩");
+      Items.push(data);
+      client.items.set(item.data.id, data);
     });
   } else table.addRow("Blank.", "🟥");
   return console.log(

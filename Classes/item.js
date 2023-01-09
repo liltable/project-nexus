@@ -1,4 +1,4 @@
-export class Item {
+class Item {
   constructor() {
     this.name = null;
     this.description = null;
@@ -60,7 +60,7 @@ export class Item {
   }
 }
 
-export class Weapon extends Item {
+class Weapon extends Item {
   constructor() {
     super();
     this.type = "Weapon";
@@ -81,7 +81,7 @@ export class Weapon extends Item {
   }
 }
 
-export class Helmet extends Item {
+class Helmet extends Item {
   constructor() {
     super();
     this.type = "Helmet";
@@ -110,7 +110,7 @@ export class Helmet extends Item {
     return this;
   }
 }
-export class Chestplate extends Item {
+class Chestplate extends Item {
   constructor() {
     super();
     this.type = "Helmet";
@@ -139,7 +139,7 @@ export class Chestplate extends Item {
     return this;
   }
 }
-export class Boots extends Item {
+class Boots extends Item {
   constructor() {
     super();
     this.type = "Helmet";
@@ -152,7 +152,7 @@ export class Boots extends Item {
    * @param {Number} d
    */
   setDefaultDefense(d) {
-    this.d = d;
+    this.defense = d;
     return this;
   }
   /**
@@ -168,3 +168,11 @@ export class Boots extends Item {
     return this;
   }
 }
+
+module.exports = {
+  Item,
+  Weapon,
+  Boots,
+  Chestplate,
+  Helmet,
+};

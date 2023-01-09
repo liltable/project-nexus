@@ -73,6 +73,23 @@ const NexusStorage = new Schema({
   ],
 });
 
+const FightStorage = new Schema({
+  FightID: { type: String, required: true },
+  AttackerID: { type: String, required: true },
+  DefenderID: { type: String, required: true },
+  Turn: {
+    player: { type: String, required: true, enum: ["Attacker", "Defender"] },
+    number: { type: Number, required: true, default: 1 },
+  },
+  Winner: {
+    type: String,
+    required: true,
+    enum: ["Attacker", "Defender", "Unresolved"],
+    default: "Unresolved",
+  },
+});
+
 module.exports = {
   DB: model("projnex", NexusStorage),
+  Fights: model("projnexfights", FightStorage),
 };
