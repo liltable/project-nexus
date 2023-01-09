@@ -87,6 +87,7 @@ const FightStorage = new Schema({
     enum: ["Attacker", "Defender", "Unresolved"],
     default: "Unresolved",
   },
+  Logs: { type: Array, required: true, default: [] },
 });
 
 module.exports = {
