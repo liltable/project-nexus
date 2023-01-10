@@ -26,6 +26,7 @@ var startClient = true;
 
 if (startClient) {
   client.login(client.config.token);
+  set("strictQuery", true);
   connect(client.config.db, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -44,7 +45,6 @@ loadItems(client);
 setTimeout(() => {
   if (!client.isReady())
     return console.log(`> Failed to login after five seconds.`);
-  process.abort();
 }, ms("5s"));
 
 module.exports = client;
