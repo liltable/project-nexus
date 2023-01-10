@@ -22,11 +22,10 @@ client.selectMenus = new Collection();
 client.messages = new Collection();
 client.items = new Collection();
 
-var startClient = false;
+var startClient = true;
 
 if (startClient) {
   client.login(client.config.token);
-  set(`strictQuery`, true);
   connect(client.config.db, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

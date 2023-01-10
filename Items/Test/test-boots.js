@@ -1,4 +1,4 @@
-const { Boots } = require("../../Classes/item");
+const { Boots } = require("../../Classes/items");
 
 module.exports = {
   data: new Boots()

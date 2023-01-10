@@ -90,7 +90,7 @@ async function loadCommands(client) {
 }
 
 const { Client } = require("discord.js");
-const { Item } = require("./Classes/item");
+const { Item } = require("./Classes/items");
 /**
  *
  * @param {Client} client
