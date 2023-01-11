@@ -49,6 +49,8 @@ const NexusStorage = new Schema({
       Aliases: { type: Array, required: false, default: [] },
       Name: { type: String, required: true },
       Description: { type: String, required: false },
+      Equipped: { type: Boolean, default: false, enum: [false, true] },
+      Durability: { type: Number, default: 100, required: true },
       Grade: {
         Value: String,
         default: "F",
@@ -69,6 +71,25 @@ const NexusStorage = new Schema({
         ],
         required: true,
       },
+      Enchantments: [
+        {
+          Name: { type: String, required: true },
+          Description: { type: String, required: true },
+          ID: { type: String, required: true },
+          Type: {
+            type: String,
+            required: true,
+            default: "Any",
+            enum: ["Damage", "Defense", "Skill"],
+          },
+          MinLevel: {
+            type: Number,
+            required: false,
+            default: 0,
+            x,
+          },
+        },
+      ],
     },
   ],
 });
