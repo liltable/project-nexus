@@ -5,9 +5,10 @@ module.exports = {
     .setDefaultDefense(10)
     .setDefaultDurability(75)
     .setGrade("F")
-    .setId("test-boots")
+    .setId("testboots")
     .addAlias("tb")
     .setName("Test Boots")
     .setDescription("Testing boots.")
-    .setValue(50),
+    .setValue(50)
+    .setColor("White"),
 };

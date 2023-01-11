@@ -12,5 +12,6 @@ module.exports = {
   },
   Formatting: {
     Border: "︱",
+    Coin: "⌬",
   },
 };

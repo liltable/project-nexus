@@ -1,3 +1,5 @@
+const { Formatting } = require("../embeds");
+
 class Item {
   constructor() {
     this.name = null;
@@ -6,6 +8,15 @@ class Item {
     this.grade = null;
     this.value = 10;
     this.id = null;
+    this.color = "Random";
+  }
+  /**
+   *
+   * @param {import("discord.js").ColorResolvable} c
+   */
+  setColor(c) {
+    this.color = c;
+    return this;
   }
   /**
    *
@@ -113,7 +124,7 @@ class Helmet extends Item {
 class Chestplate extends Item {
   constructor() {
     super();
-    this.type = "Helmet";
+    this.type = "Chestplate";
     this.level = 1;
     this.durability = 100 * +this.level;
     this.defense = 10 * +this.durability;
@@ -142,7 +153,7 @@ class Chestplate extends Item {
 class Boots extends Item {
   constructor() {
     super();
-    this.type = "Helmet";
+    this.type = "Boots";
     this.level = 1;
     this.durability = 100 * +this.level;
     this.defense = 10 * +this.durability;
@@ -166,6 +177,18 @@ class Boots extends Item {
   levelUp() {
     this.level++;
     return this;
+  }
+  formatAsEmbed() {
+    const { EmbedBuilder } = require("discord.js");
+    const Embed = new EmbedBuilder()
+      .setTitle(`Item: ${this.name}`)
+      .setColor(this.color)
+      .setDescription(`\n\n> *${this.description}*\n`)
+      .setFields({
+        name: "Statistics",
+        value: `> Defense: ${this.defense}\n> Grade: ${this.grade}\n> Durability: ${this.durability}\n> Base Value: ${Formatting.Coin} ${this.value}`,
+      });
+    return Embed;
   }
 }
 

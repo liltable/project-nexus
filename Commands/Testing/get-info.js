@@ -5,8 +5,9 @@ const {
   Client,
 } = require("discord.js");
 const client = require("../../");
-const Items = [];
-client.items.forEach((item) => Items.push({ name: item.name, value: item.id }));
+const { getItemsArray } = require("../../functions");
+
+const { Item } = require("../../Classes/items");
 module.exports = {
   name: "get-info",
   description: "Returns the info of an item.",
@@ -17,7 +18,6 @@ module.exports = {
       type: ApplicationCommandOptionType.String,
       required: true,
       autocomplete: true,
-      choices: Items,
     },
   ],
   /**
@@ -28,7 +28,7 @@ module.exports = {
   async autocomplete(interaction, client) {
     const FocusedOption = interaction.options.getFocused(true);
     if (FocusedOption.name !== "search") return;
-    const choices = this.options[0].choices;
+    const choices = (await getItemsArray()).map((item) => item.name);
     const filtered = choices.filter((choice) =>
       choice.startsWith(FocusedOption.value)
     );
@@ -36,15 +36,21 @@ module.exports = {
       filtered.map((choice) => ({ name: choice, value: choice }))
     );
   },
-  /**
-   *
-   * @param {ChatInputCommandInteraction} interaction
-   * @param {Client} client
-   */
-  async execute(interaction, client) {
+  async execute(interaction) {
+    const client = require("../../");
     const Option = interaction.options.getString("search", true);
-    const Item = await client.items.find((item) => item.id === Option);
+    const Item = await client.items.find(
+      /**
+       *
+       * @param {Item} item
+       * @returns
+       */
+      (item) =>
+        item.id === Option ||
+        item.name === Option ||
+        item.aliases.includes(Option)
+    );
 
-    return interaction.reply({ content: `${Item}` });
+    await interaction.reply({ embeds: [Item.formatAsEmbed()] });
   },
 };
