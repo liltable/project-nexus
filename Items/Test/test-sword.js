@@ -8,5 +8,6 @@ module.exports = {
     .setValue(5)
     .setGrade("F")
     .setId("testsword")
-    .addAlias("ts"),
+    .addAlias("ts")
+    .setEnchantable(false),
 };

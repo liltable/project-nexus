@@ -10,5 +10,6 @@ module.exports = {
     .setName("Test Boots")
     .setDescription("Testing boots.")
     .setValue(50)
-    .setColor("White"),
+    .setColor("White")
+    .setEnchantable(true),
 };

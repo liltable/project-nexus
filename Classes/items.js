@@ -1,4 +1,5 @@
 const { Formatting } = require("../embeds");
+const { NexusPFP } = require("../Images/Client/url");
 
 class Item {
   constructor() {
@@ -9,6 +10,7 @@ class Item {
     this.value = 10;
     this.id = null;
     this.color = "Random";
+    this.enchantable = false;
   }
   /**
    *
@@ -69,6 +71,15 @@ class Item {
       return this;
     }
   }
+  /**
+   *
+   * @param {Boolean} t
+   */
+  setEnchantable(t) {
+    if (t) this.enchantable = true;
+    else this.enchantable = false;
+    return this;
+  }
 }
 
 class Weapon extends Item {
@@ -77,6 +88,8 @@ class Weapon extends Item {
     this.type = "Weapon";
     this.damage = null;
     this.level = 1;
+    this.durability = 100;
+    this.attack = 0;
   }
   /**
    *
@@ -86,8 +99,37 @@ class Weapon extends Item {
     this.damage = d;
     return this;
   }
+  /**
+   *
+   * @param {Number} d
+   * @returns
+   */
+  setDefaultDurability(d) {
+    this.durability = d;
+    return this;
+  }
   levelUp() {
     this.level++;
+    return this;
+  }
+  formatAsEmbed() {
+    const { EmbedBuilder } = require("discord.js");
+    const Embed = new EmbedBuilder()
+      .setAuthor({ iconURL: NexusPFP, name: `Item Info: ${this.name}` })
+      .setColor(this.color)
+      .setDescription(`\n\n *${this.description}*\n`)
+      .setFields({
+        name: "Statistics",
+        value: `> Attack: ${this.attack} HP\n> Grade: ${this.grade}\n> Durability: ${this.durability}\n> Base Value: ${Formatting.Coin} ${this.value}`,
+      });
+    return Embed;
+  }
+  /**
+   *
+   * @param {Number} n
+   */
+  setAttack(n) {
+    this.attack = n;
     return this;
   }
 }
@@ -98,14 +140,14 @@ class Helmet extends Item {
     this.type = "Helmet";
     this.level = 1;
     this.durability = 100 * +this.level;
-    this.defense = 10 * +this.durability;
+    this.attack = 10 * +this.durability;
   }
   /**
    *
    * @param {Number} d
    */
-  setDefaultDefense(d) {
-    this.d = d;
+  setDefaultAttack(d) {
+    this.attack = d;
     return this;
   }
   /**
@@ -119,6 +161,18 @@ class Helmet extends Item {
   levelUp() {
     this.level++;
     return this;
+  }
+  formatAsEmbed() {
+    const { EmbedBuilder } = require("discord.js");
+    const Embed = new EmbedBuilder()
+      .setAuthor({ iconURL: NexusPFP, name: `Item Info: ${this.name}` })
+      .setColor(this.color)
+      .setDescription(`\n\n *${this.description}*\n`)
+      .setFields({
+        name: "Statistics",
+        value: `> Defense: ${this.attack} HP\n> Grade: ${this.grade}\n> Durability: ${this.durability}\n> Base Value: ${Formatting.Coin} ${this.value}`,
+      });
+    return Embed;
   }
 }
 class Chestplate extends Item {
@@ -148,6 +202,18 @@ class Chestplate extends Item {
   levelUp() {
     this.level++;
     return this;
+  }
+  formatAsEmbed() {
+    const { EmbedBuilder } = require("discord.js");
+    const Embed = new EmbedBuilder()
+      .setAuthor({ iconURL: NexusPFP, name: `Item Info: ${this.name}` })
+      .setColor(this.color)
+      .setDescription(`\n\n *${this.description}*\n`)
+      .setFields({
+        name: "Statistics",
+        value: `> Defense: ${this.defense}\n> Grade: ${this.grade}\n> Durability: ${this.durability}\n> Base Value: ${Formatting.Coin} ${this.value}`,
+      });
+    return Embed;
   }
 }
 class Boots extends Item {
@@ -181,11 +247,11 @@ class Boots extends Item {
   formatAsEmbed() {
     const { EmbedBuilder } = require("discord.js");
     const Embed = new EmbedBuilder()
-      .setTitle(`Item: ${this.name}`)
       .setColor(this.color)
-      .setDescription(`\n\n> *${this.description}*\n`)
+      .setAuthor({ iconURL: NexusPFP, name: `Item Info: ${this.name}` })
+      .setDescription(`\n\n *${this.description}*\n`)
       .setFields({
-        name: "Statistics",
+        name: "Statistics:",
         value: `> Defense: ${this.defense}\n> Grade: ${this.grade}\n> Durability: ${this.durability}\n> Base Value: ${Formatting.Coin} ${this.value}`,
       });
     return Embed;
