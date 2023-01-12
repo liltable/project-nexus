@@ -234,6 +234,85 @@ async function getItemsArray() {
 
   return Items;
 }
+/**
+ *
+ * @param {Client} client
+ */
+async function loadAttacks(client) {
+  await client.attacks.clear();
+  const ascii = require("ascii-table");
+  const table = new ascii().setHeading("Attacks:", "Status:");
+  const Attacks = [];
+  const Files = await loadFiles("Attacks");
+  if (Files.length !== 0) {
+    Files.forEach((file) => {
+      const attack = require(file);
+      const { data } = item;
+      if (!data.id) return table.addRow("UNDEFINED", "🟥");
+      if (!data.name) return table.addRow(data.id, "NO NAME");
+      else table.addRow(data.name, "🟩");
+      Attacks.push(data);
+      client.attacks.set(attack.data.id, data);
+    });
+  } else table.addRow("Blank.", "🟥");
+  console.log(
+    table.toString(),
+    `\n> Successfully loaded ${Attacks.length} items.`
+  );
+}
+async function getAttacksArray() {
+  const Attacks = [];
+  const Files = await loadFiles("Attacks");
+  if (Files.length !== 0) {
+    Files.forEach((file) => {
+      const attack = require(file);
+      const { data } = attack;
+      Attacks.push(data);
+    });
+  }
+
+  return Attacks;
+}
+/**
+ *
+ * @param {Client} client
+ */
+async function loadEnemies(client) {
+  await client.loadEnemies.clear();
+  const ascii = require("ascii-table");
+  const table = new ascii().setHeading("Enemies:", "Status:");
+  const Enemies = [];
+  const Files = await loadFiles("Attacks");
+  if (Files.length !== 0) {
+    Files.forEach((file) => {
+      const attack = require(file);
+      const { data } = item;
+      if (!data.id) return table.addRow("UNDEFINED", "🟥");
+      if (!data.name) return table.addRow(data.id, "NO NAME");
+      else table.addRow(data.name, "🟩");
+      Enemies.push(data);
+      client.Enemies.set(attack.data.id, data);
+    });
+  } else table.addRow("Blank.", "🟥");
+  console.log(
+    table.toString(),
+    `\n> Successfully loaded ${Enemies.length} items.`
+  );
+}
+
+async function getEnemiesArray() {
+  const Enemies = [];
+  const Files = await loadFiles("Enemies");
+  if (Files.length !== 0) {
+    Files.forEach((file) => {
+      const enemy = require(file);
+      const { data } = enemy;
+      Enemies.push(data);
+    });
+  }
+
+  return Enemies;
+}
 
 module.exports = {
   loadEvents,
@@ -246,4 +325,8 @@ module.exports = {
   loadSelectMenus,
   loadItems,
   getItemsArray,
+  loadAttacks,
+  getAttacksArray,
+  loadEnemies,
+  getEnemiesArray,
 };

@@ -21,6 +21,9 @@ client.colors = require("discord.js").Colors;
 client.selectMenus = new Collection();
 client.messages = new Collection();
 client.items = new Collection();
+client.attacks = new Collection();
+client.enchants = new Collection();
+client.enemies = new Collection();
 
 var startClient = true;
 
