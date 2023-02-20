@@ -49,3 +49,7 @@ class Enchantments {
     return this;
   }
 }
+
+module.exports = {
+  Enchantments,
+};

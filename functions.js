@@ -278,7 +278,7 @@ async function getAttacksArray() {
  * @param {Client} client
  */
 async function loadEnemies(client) {
-  await client.loadEnemies.clear();
+  await client.enemies.clear();
   const ascii = require("ascii-table");
   const table = new ascii().setHeading("Enemies:", "Status:");
   const Enemies = [];

@@ -8,7 +8,7 @@ class Attack {
     this.requiredLevel = 0;
     this.lowestdmg = null;
     this.highestdmg = null;
-    this.damage = Math.floor(Math.random(this.lowestdmg, this.highestdmg));
+    this.damage = Math.ceil(Math.random(this.lowestdmg, this.highestdmg));
     this.critperecent = null;
     this.criticalDamage = Math.floor(this.damage * this.critperecent);
   }
@@ -72,3 +72,5 @@ class Attack {
     return this.damage;
   }
 }
+
+module.exports = { Attack };

@@ -10,6 +10,10 @@ const DefaultButtons = {
     .setCustomId("exit")
     .setLabel("❌")
     .setStyle(ButtonStyle.Danger),
+  Menu: new ButtonBuilder()
+    .setCustomId("menu")
+    .setLabel("Main Menu")
+    .setStyle(ButtonStyle.Success),
 };
 const DefaultEmbeds = {
   UnknownMember: new EmbedBuilder()
