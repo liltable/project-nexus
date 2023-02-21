@@ -14,6 +14,18 @@ const DefaultButtons = {
     .setCustomId("menu")
     .setLabel("Main Menu")
     .setStyle(ButtonStyle.Success),
+  Profile: new ButtonBuilder()
+    .setCustomId("profile")
+    .setLabel("Profile")
+    .setStyle(ButtonStyle.Primary),
+  Inventory: new ButtonBuilder()
+    .setCustomId("inventory")
+    .setLabel("Inventory")
+    .setStyle(ButtonStyle.Primary),
+  Status: new ButtonBuilder()
+    .setCustomId("status")
+    .setLabel("Status")
+    .setStyle(ButtonStyle.Primary),
 };
 const DefaultEmbeds = {
   UnknownMember: new EmbedBuilder()

@@ -1,5 +1,13 @@
 const { EmbedBuilder } = require("@discordjs/builders");
-const { ButtonInteraction, Colors, Client } = require("discord.js");
+const {
+  ButtonInteraction,
+  Colors,
+  Client,
+  ActionRow,
+  ActionRowBuilder,
+  ButtonBuilder,
+} = require("discord.js");
+const { DefaultButtons } = require("../../default");
 
 module.exports = {
   id: "start",
@@ -14,8 +22,18 @@ module.exports = {
         iconURL: interaction.user.avatarURL(),
         name: interaction.user.username + "#" + interaction.user.discriminator,
       })
-      .setTitle(`Nexus | Menu`);
+      .setTitle(`Nexus | Menu`)
+      .setDescription(
+        `> The developers should've included a tutorial of some sorts here, but were too lazy. Here's the main menu.`
+      );
 
-    interaction.reply({ embeds: [Embed] });
+    const Row = new ActionRowBuilder().setComponents(
+      DefaultButtons.Profile,
+      DefaultButtons.Status,
+      DefaultButtons.Inventory,
+      DefaultButtons.Exit
+    );
+
+    interaction.reply({ embeds: [Embed], components: [Row], ephemeral: true });
   },
 };

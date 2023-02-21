@@ -24,7 +24,7 @@ const NexusStorage = new Schema({
       Unlocked: [
         {
           Name: { type: String, required: true },
-          Description: String,
+          Description: { type: String, required: true },
           Equipped: { type: Boolean, default: false, enum: [false, true] },
         },
       ],
@@ -52,7 +52,7 @@ const NexusStorage = new Schema({
       Equipped: { type: Boolean, default: false, enum: [false, true] },
       Durability: { type: Number, default: 100, required: true },
       Grade: {
-        Value: String,
+        type: String,
         default: "F",
         enum: ["F", "D", "C", "B", "A", "AA", "AAA", "S", "SS"],
       },
@@ -86,12 +86,15 @@ const NexusStorage = new Schema({
             type: Number,
             required: false,
             default: 0,
-            x,
           },
         },
       ],
     },
   ],
+  Fights: {
+    Wins: { type: Number, required: true, default: 0 },
+    Losses: { type: Number, required: true, default: 0 },
+  },
 });
 
 const FightStorage = new Schema({
