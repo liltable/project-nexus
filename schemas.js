@@ -2,6 +2,12 @@ const { Schema, model } = require("mongoose");
 
 const NexusStorage = new Schema({
   PlayerID: { type: String, required: true },
+  Activity: {
+    type: String,
+    default: "Idle",
+    required: true,
+    enum: ["Idle", "Fighting", "Traveling"],
+  },
   Stats: {
     Defense: { type: Number, default: 10 },
     Attack: { type: Number, default: 10 },
@@ -46,6 +52,7 @@ const NexusStorage = new Schema({
   Inventory: [
     {
       ID: { type: String, required: true },
+      Amount: { type: Number, default: 0, required: true },
       Aliases: { type: Array, required: false, default: [] },
       Name: { type: String, required: true },
       Description: { type: String, required: false },

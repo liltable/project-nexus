@@ -18,21 +18,21 @@ module.exports = {
         content: "No duplicating accounts.",
         ephemeral: true,
       });
-
-    const NewPlayer = await DB.create({
-      PlayerID: interaction.user.id,
-      Profile: {
-        Titles: {
-          Unlocked: [
-            {
-              Name: "The Rising Star",
-              Description: "Title of a beginner to the World of Nexus!",
-              Equipped: true,
-            },
-          ],
+    else
+      await DB.create({
+        PlayerID: interaction.user.id,
+        Profile: {
+          Titles: {
+            Unlocked: [
+              {
+                Name: "The Rising Star",
+                Description: "Soon you will shine above the others.",
+                Equipped: true,
+              },
+            ],
+          },
         },
-      },
-    });
+      });
 
     if (!interaction.replied) {
       return interaction.reply({

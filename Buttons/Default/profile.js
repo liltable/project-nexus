@@ -1,11 +1,13 @@
 const { EmbedBuilder } = require("@discordjs/builders");
 const { default: aveta } = require("aveta");
-const { ButtonInteraction, Client } = require("discord.js");
+const { ButtonInteraction, Client, ActionRowBuilder } = require("discord.js");
+const { DefaultButtons } = require("../../default");
 const { Formatting } = require("../../embeds");
 const { DB } = require("../../schemas");
 
 module.exports = {
   id: "profile",
+  back: "start",
   /**
    *
    * @param {ButtonInteraction} interaction
@@ -75,6 +77,9 @@ module.exports = {
         }
       );
 
-    return interaction.reply({ embeds: [Embed], ephemeral: true });
+    return interaction.reply({
+      embeds: [Embed],
+      ephemeral: true,
+    });
   },
 };
