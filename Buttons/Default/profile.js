@@ -7,7 +7,6 @@ const { DB } = require("../../schemas");
 
 module.exports = {
   id: "profile",
-  back: "start",
   /**
    *
    * @param {ButtonInteraction} interaction

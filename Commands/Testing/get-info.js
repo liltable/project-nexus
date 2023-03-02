@@ -9,7 +9,7 @@ const { getItemsArray } = require("../../functions");
 
 const { Item } = require("../../Classes/items");
 module.exports = {
-  name: "get-info",
+  name: "item",
   description: "Returns the info of an item.",
   options: [
     {
@@ -51,6 +51,9 @@ module.exports = {
         item.aliases.includes(Option)
     );
 
-    await interaction.reply({ embeds: [Item.formatAsEmbed()] });
+    await interaction.reply({
+      embeds: [Item.formatAsEmbed()],
+      ephemeral: true,
+    });
   },
 };

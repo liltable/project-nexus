@@ -119,7 +119,7 @@ class Weapon extends Item {
       .setColor(this.color)
       .setDescription(`\n\n *${this.description}*\n`)
       .setFields({
-        name: "Statistics",
+        name: "Statistics:",
         value: `> Attack: ${this.attack} HP\n> Grade: ${this.grade}\n> Durability: ${this.durability}\n> Base Value: ${Formatting.Coin} ${this.value}`,
       });
     return Embed;
